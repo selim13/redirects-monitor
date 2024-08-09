@@ -1,0 +1,6 @@
+services:
+  redirects-monitor:
+    build: .
+    volumes:
+      - ./config/:/config/
+    command: --config /config/config.yml

@@ -1,0 +1,77 @@
+---
+userAgent: 'Chrome/99.0.4844.84'
+timeout: '2s'
+sites:
+  - name: Without redirect
+    url: http://localhost:3000/without-redirect
+    onSuccess:
+      - url: http://localhost:3000/without-redirect/success
+        method: POST
+    onFailure:
+      - url: http://localhost:3000/without-redirect/failure
+        method: POST
+
+  - name: Has http redirect
+    url: http://localhost:3000/has-http-redirect
+    onSuccess:
+      - url: http://localhost:3000/has-http-redirect/success
+        method: POST
+    onFailure:
+      - url: http://localhost:3000/has-http-redirect/failure
+        method: POST
+
+  - name: Has meta redirect
+    url: http://localhost:3000/has-meta-redirect
+    onSuccess:
+      - url: http://localhost:3000/has-meta-redirect/success
+        method: POST
+    onFailure:
+      - url: http://localhost:3000/has-meta-redirect/failure
+        method: POST
+
+  - name: Has js redirect
+    url: http://localhost:3000/has-js-redirect
+    onSuccess:
+      - url: http://localhost:3000/has-js-redirect/success
+        method: POST
+    onFailure:
+      - url: http://localhost:3000/has-js-redirect/failure
+        method: POST
+
+  - name: Has request cookies
+    url: http://localhost:3000/has-request-cookie
+    cookies:
+      - name: cookie1
+        value: value1
+      - name: cookie2
+        value: value2
+    onSuccess:
+      - url: http://localhost:3000/has-request-cookie/success
+        method: POST
+    onFailure:
+      - url: http://localhost:3000/has-request-cookie/failure
+        method: POST
+
+  - name: Has request headers
+    url: http://localhost:3000/has-request-header
+    headers:
+      'x-test-header1': 'value1'
+      'x-test-header2': 'value2'
+    onSuccess:
+      - url: http://localhost:3000/has-request-header/success
+        method: POST
+    onFailure:
+      - url: http://localhost:3000/has-request-header/failure
+        method: POST
+
+  - name: Has result headers
+    url: http://localhost:3000/has-result-headers
+    onSuccess:
+      - url: http://localhost:3000/has-result-headers/success
+        method: POST
+        headers:
+          'x-test-header1': 'value1'
+          'x-test-header2': 'value2'
+    onFailure:
+      - url: http://localhost:3000/has-result-headers/failure
+        method: POST

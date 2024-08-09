@@ -1,0 +1,45 @@
+{
+  "name": "redirects-monitor",
+  "version": "1.0.0",
+  "description": "A website redirects monitoring tool",
+  "keywords": [
+    "monitoring",
+    "website",
+    "puppeteer"
+  ],
+  "license": "ISC",
+  "author": "Dmitry Seleznyov <selim013@gmail.com>",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "tsc -p .",
+    "dev": "tsx src/index.ts",
+    "start": "node build/index.js",
+    "test": "tsx src/index --config test/config.yml > /dev/null & tsx test/server.ts"
+  },
+  "dependencies": {
+    "arg": "^5.0.2",
+    "dotenv": "^16.4.5",
+    "node-cron": "^3.0.3",
+    "pino": "^9.3.2",
+    "pino-pretty": "^11.2.2",
+    "puppeteer-core": "^23.0.1",
+    "timestring": "^7.0.0",
+    "yaml": "^2.5.0"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.7",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.14.14",
+    "@types/node-cron": "^3.0.11",
+    "@types/timestring": "^6.0.5",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.19.2",
+    "prettier": "^3.3.3",
+    "prettier-plugin-packagejson": "^2.5.1",
+    "tsx": "^4.16.5",
+    "typescript": "^5.5.4"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

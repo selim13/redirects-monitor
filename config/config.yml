@@ -1,0 +1,61 @@
+---
+### Example config with all possible options.
+
+# Ensure that we are visiting with a real user agent to prevent monitor detection.
+# Default: puppeteer's default user agent
+userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36'
+
+# A global timer to wait for a redirect.
+# Default: 10s
+timeout: '5s'
+
+# Running monitor on schedule using cron expression.
+# If not set, monitor will run only once and exit.
+# Default:
+schedule: '* */6 * * *'
+
+# List of sites to monitor
+sites:
+  # A handy name for the site
+  - name: Without redirect
+    # A site URL to monitor
+    url: https://example.com
+    # Per site timer to wait for a redirect.
+    timeout: '10s'
+    # Headers to send with the request by the puppeteer.
+    headers:
+      Authorization: 'Bearer <token>'
+    # Cookies to send with the request by the puppeteer.
+    # name, value, and domain params are required.
+    # See https://pptr.dev/api/puppeteer.cookieparam for all available options.
+    cookies:
+      - name: is_admin
+        value: '1'
+        domain: '.example.com'
+    # Requests to perform when a redirect NOT found (concedered as success).
+    onSuccess:
+      - url: 'https://<monitoring_host>/on-success'
+        method: POST # GET, POST, PUT, PATCH, DELETE
+        headers:
+          Authorization: 'Bearer <token>'
+    # Requests to perform when a redirect found (concedered as failure).
+    onFailure:
+      - url: 'https://<monitoring_host>/on-failure'
+        method: POST
+        headers:
+          Authorization: 'Bearer <token>'
+
+  # Example for Gatus monitoring dashboard using external enpoints.
+  # https://github.com/TwiN/gatus
+  - name: Example for gatus
+    url: https://example.com
+    onSuccess:
+      - url: 'https://<gatus_host>/api/v1/endpoints/<group>_<name>/external?success=true'
+        method: POST
+        headers:
+          Authorization: 'Bearer <token>'
+    onFailure:
+      - url: 'https://<gatus_host>/api/v1/endpoints/<group>_<name>/external?success=false'
+        method: POST
+        headers:
+          Authorization: 'Bearer <token>'
