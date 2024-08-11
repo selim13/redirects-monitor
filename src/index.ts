@@ -51,6 +51,7 @@ Options:
   const config = YAML.parse(configFile);
 
   if (config.userAgent) options.userAgent = config.userAgent;
+  if (config.schedule) options.schedule = config.schedule;
   if (config.timeout) options.timeout = str2ms(config.timeout);
   if (config.sites) {
     for (const configSite of config.sites) {
